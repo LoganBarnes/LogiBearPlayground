@@ -6,6 +6,14 @@
 # Compiled Source #
 ###################
 build/
+_build/
+
+# Installed Dirs #
+##################
+run/bin
+run/lib
+run/libbin
+run/include
 
 # OS Generated Files #
 ######################

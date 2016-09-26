@@ -1,6 +1,8 @@
 cmake_minimum_required ( VERSION 3.0.0 )
 project ( BaseProject )
 
+set( temp common/ )
+
 # namespace used for project
 set ( PROJECT_NAMESPACE lbp )
 
@@ -9,10 +11,10 @@ set ( PROJECT_VERSION_MAJOR 1 )
 set ( PROJECT_VERSION_MINOR 0 )
 set ( PROJECT_VERSION_PATCH 0 )
 
-set( PROJECT_CONFIG_FILE ${SRC_DIR}/ProjectConfig.hpp.in )
-
 # required before DefaultProjectLibrary.cmake
-set( SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src )
+set( SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/${temp}src )
+
+set( PROJECT_CONFIG_FILE ${SRC_DIR}/ProjectConfig.hpp.in )
 
 # header dirs
 set(
@@ -31,5 +33,5 @@ set(
 # file with main function
 set( PROJECT_MAIN ${SRC_DIR}/Main.cpp )
 
-include( cmake/DefaultProjectLibrary.cmake )
+include( ${temp}cmake/DefaultProjectLibrary.cmake )
 
