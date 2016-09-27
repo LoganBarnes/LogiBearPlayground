@@ -1,37 +1,60 @@
 cmake_minimum_required ( VERSION 3.0.0 )
-project ( BaseProject )
+project ( LBSetup )
 
-set( temp common/ )
 
-# namespace used for project
-set ( PROJECT_NAMESPACE lbp )
+set( BUILD_DIR_NAME _build )
 
-# The version number.
-set ( PROJECT_VERSION_MAJOR 1 )
-set ( PROJECT_VERSION_MINOR 0 )
-set ( PROJECT_VERSION_PATCH 0 )
+set( COMMON_PATH ${PROJECT_SOURCE_DIR}/common     )
+set( THIRDPARTY  ${PROJECT_SOURCE_DIR}/thirdparty )
+set( RUN_DIR     ${PROJECT_SOURCE_DIR}/run        )
 
-# required before DefaultProjectLibrary.cmake
-set( SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/${temp}src )
 
-set( PROJECT_CONFIG_FILE ${SRC_DIR}/ProjectConfig.hpp.in )
+include( ExternalProject )
 
-# header dirs
-set(
-    PROJECT_INCLUDE_DIRS
-    ${SRC_DIR}
-    )
+################################################
+##                    GLFW                    ##
+################################################
+ExternalProject_Add(
+                    glfwLib
+                    PREFIX           ${THIRDPARTY}/_build/glfw
+                    DOWNLOAD_COMMAND ""
+                    UPDATE_COMMAND   ""
+                    SOURCE_DIR       ${THIRDPARTY}/glfw
+                    CMAKE_ARGS       -DGLFW_BUILD_DOCS:BOOL=OFF
+                                     -DGLFW_BUILD_TESTS:BOOL=OFF
+                                     -DGLFW_BUILD_EXAMPLES:BOOL=OFF
+                                     -DBUILD_SHARED_LIBS:BOOL=ON
+                                     -DUSE_MSVC_RUNTIME_LIBRARY_DLL:BOOL=ON
+                                     -DCMAKE_INSTALL_PREFIX:STRING=${RUN_DIR}
+                    )
 
-# cpp files
-set(
-    PROJECT_SOURCE
-    ${SRC_DIR}/Driver.cpp
-    ${SRC_DIR}/Renderer.cpp
-    ${SRC_DIR}/World.cpp
-    )
 
-# file with main function
-set( PROJECT_MAIN ${SRC_DIR}/Main.cpp )
 
-include( ${temp}cmake/DefaultProjectLibrary.cmake )
+
+###############################################
+##                    GLM                    ##
+###############################################
+ExternalProject_Add(
+                    gladLib
+                    PREFIX           ${THIRDPARTY}/_build/glad
+                    DOWNLOAD_COMMAND ""
+                    UPDATE_COMMAND   ""
+                    SOURCE_DIR       ${THIRDPARTY}/glad
+                    CMAKE_ARGS       -DCMAKE_INSTALL_PREFIX:STRING=${RUN_DIR}
+                    )
+
+
+
+################################################
+##                   COMMON                   ##
+################################################
+ExternalProject_Add(
+                    LBCommon
+                    PREFIX          ${PROJECT_BINARY_DIR}/common
+                    DEPENDS          glfwLib gladLib
+                    DOWNLOAD_COMMAND ""
+                    UPDATE_COMMAND   ""
+                    SOURCE_DIR       ${COMMON_PATH}
+                    CMAKE_ARGS       -DCMAKE_INSTALL_PREFIX:STRING=${RUN_DIR}
+                    )
 

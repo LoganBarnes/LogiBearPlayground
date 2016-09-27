@@ -9,5 +9,5 @@ fi;
 
 cd _build
 cmake -DINSTALL_DIR=$RUN_DIR ../..
-make -j12 install
+make -j12
 cd ..

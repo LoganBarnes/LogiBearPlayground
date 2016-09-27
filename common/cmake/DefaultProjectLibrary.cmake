@@ -21,57 +21,6 @@ set ( PROJECT_INCLUDE_DIRS ${PROJECT_INCLUDE_DIRS} ${PROJECT_BINARY_DIR})
 source_group( "" FILES ${PROJECT_SOURCE} )
 
 
-if ( NOT IS_ABSOLUTE ${INSTALL_DIR} )
-
-  set( INSTALL_DIR ${CMAKE_CURRENT_SOURCE_DIR}/${INSTALL_DIR} )
-
-endif()
-
-set( CMAKE_INSTALL_PREFIX ${INSTALL_DIR} )
-set( LIB_SUFFIX bin )
-
-
-#
-# glad
-#
-set(
-    PROJECT_SYSTEM_INCLUDE_DIRS
-    ${PROJECT_SYSTEM_INCLUDE_DIRS}
-    ${THIRDPARTY}/glad/include
-    )
-
-set( GLAD_SOURCE ${THIRDPARTY}/glad/src/glad.c )
-
-
-#
-# add glfw3 variables
-#
-set( GLFW_BUILD_DOCS     OFF CACHE BOOL "" FORCE )
-set( GLFW_BUILD_TESTS    OFF CACHE BOOL "" FORCE )
-set( GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE )
-
-set( BUILD_SHARED_LIBS   ON  CACHE BOOL "" FORCE )
-
-if ( WIN32 )
-  set( USE_MSVC_RUNTIME_LIBRARY_DLL ON CACHE BOOL "" FORCE )
-endif()
-
-
-#
-# glfw
-#
-add_subdirectory   ( ${THIRDPARTY}/glfw )
-set(
-    PROJECT_SYSTEM_INCLUDE_DIRS
-    ${PROJECT_SYSTEM_INCLUDE_DIRS}
-    ${THIRDPARTY}/glfw/include
-    )
-
-set ( EXTRA_LIBS  ${EXTRA_LIBS}  ${GLFW_LIBRARIES} )
-set ( DEP_TARGETS ${DEP_TARGETS} glfw )
-
-
-
 # compile flags
 if ( CMAKE_CXX_COMPILER_ID STREQUAL "MSVC" )
   set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall" )
@@ -88,7 +37,10 @@ endif()
 # make project into library that can be used by multiple executables ( such as test classes )
 add_library           ( ${PROJECT_NAME} SHARED ${PROJECT_SOURCE} ${GLAD_SOURCE} )
 target_link_libraries ( ${PROJECT_NAME} ${EXTRA_LIBS} ${DEP_TARGETS}     )
-add_dependencies      ( ${PROJECT_NAME} ${DEP_TARGETS}                   )
+
+if ( ${DEP_TARGETS} )
+  add_dependencies ( ${PROJECT_NAME} ${DEP_TARGETS} )
+endif( )
 
 target_include_directories( ${PROJECT_NAME} SYSTEM PUBLIC ${PROJECT_SYSTEM_INCLUDE_DIRS} )
 target_include_directories( ${PROJECT_NAME}        PUBLIC ${PROJECT_INCLUDE_DIRS}        )

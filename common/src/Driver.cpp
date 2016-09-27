@@ -19,10 +19,12 @@ const double MAX_TIMESTEP_NFTR_LOOP = 0.05;
 }
 
 
-///
+/////////////////////////////////////////////
 /// \brief Driver::Driver
 /// \param world
 ///
+/// \author LogiBear
+/////////////////////////////////////////////
 Driver::Driver(
                World    &world,
                Renderer &renderer
@@ -41,23 +43,25 @@ Driver::Driver(
 
 
 
-///
+/////////////////////////////////////////////
 /// \brief Driver::~Driver
 ///
+/// \author LogiBear
+/////////////////////////////////////////////
 Driver::~Driver( )
 {}
 
 
-///
+/////////////////////////////////////////////
 /// \brief Driver::exec
-/// \param argc
-/// \param argv
 /// \return
 ///
+/// \author LogiBear
+/////////////////////////////////////////////
 int
 Driver::exec(
-             int    argc,
-             char **argv
+             int          argc, ///< number of arguments
+             const char **argv  ///< array of argument strings
              )
 {
 
@@ -100,9 +104,11 @@ Driver::exec(
 
 
 
-///
+/////////////////////////////////////////////
 /// \brief Driver::_runAFAPLoop
 ///
+/// \author LogiBear
+/////////////////////////////////////////////
 void
 Driver::_runAFAPLoop( )
 {
@@ -129,9 +135,11 @@ Driver::_runAFAPLoop( )
 
 
 
-///
+/////////////////////////////////////////////
 /// \brief Driver::_runNFTRLoop
 ///
+/// \author LogiBear
+/////////////////////////////////////////////
 void
 Driver::_runNFTRLoop( )
 {
@@ -203,9 +211,11 @@ Driver::_runNFTRLoop( )
 
 
 
-///
+/////////////////////////////////////////////
 /// \brief Driver::_getTimeSeconds
 ///
+/// \author LogiBear
+/////////////////////////////////////////////
 double
 Driver::_getTimeSeconds( )
 {
@@ -226,19 +236,17 @@ Driver::_getTimeSeconds( )
 
 
 
-///
+/////////////////////////////////////////////
 /// \brief Driver::printProjectInfo
-/// \param name
-/// \param versionMajor
-/// \param versionMinor
-/// \param versionPatch
 ///
+/// \author LogiBear
+/////////////////////////////////////////////
 void
 Driver::printProjectInfo(
-                         std::string name,
-                         std::string versionMajor,
-                         std::string versionMinor,
-                         std::string versionPatch
+                         std::string name,         ///<
+                         std::string versionMajor, ///<
+                         std::string versionMinor, ///<
+                         std::string versionPatch  ///<
                          )
 {
 

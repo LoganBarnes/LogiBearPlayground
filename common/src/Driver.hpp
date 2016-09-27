@@ -47,8 +47,8 @@ public:
   /// \return
   ///
   int exec (
-            int    argc,
-            char **argv
+            int          argc,
+            const char **argv
             );
 
 

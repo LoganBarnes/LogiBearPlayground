@@ -6,14 +6,16 @@
 #include "Renderer.hpp"
 
 
-///
+/////////////////////////////////////////////
 /// \brief main
 /// \return
 ///
+/// \author LogiBear
+/////////////////////////////////////////////
 int
 main(
-     int    argc,
-     char **argv
+     int          argc, ///< number of arguments
+     const char **argv  ///< array of argument strings
      )
 {
 
@@ -27,6 +29,10 @@ main(
   try
   {
 
+    /// \todo Create a vector of all worlds/renderers
+    ///       and pass that to the driver instead. It
+    ///       will allow the driver to toggle through
+    ///       different project implementations
     lbp::World    world;
     lbp::Renderer renderer( world );
 
@@ -40,7 +46,7 @@ main(
 
     std::cerr << "ERROR: failed construction: " << e.what() << std::endl;
 
-    return 1;
+    return -1;
 
   }
 
