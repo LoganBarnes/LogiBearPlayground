@@ -39,12 +39,12 @@ set(
 set(
     PROJECT_SOURCE
     ${SRC_DIR}/Driver.cpp
-    ${SRC_DIR}/Renderer.cpp
+    ${SRC_DIR}/IOHandler.cpp
     ${SRC_DIR}/World.cpp
     )
 
 # file with main function
-set( PROJECT_MAIN ${SRC_DIR}/Main.cpp )
+set( PROJECT_MAIN ${SRC_DIR}/ExampleMain.cpp )
 
 include( cmake/DefaultProjectLibrary.cmake )
 

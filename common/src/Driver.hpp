@@ -1,5 +1,5 @@
-#ifndef DRIVER_HPP
-#define DRIVER_HPP
+#ifndef Driver_hpp
+#define Driver_hpp
 
 #include <string>
 #include <type_traits>
@@ -11,41 +11,43 @@ namespace lbp
 
 
 class World;
-class Renderer;
+class IOHandler;
 
 
-///
+/////////////////////////////////////////////
 /// \brief The Driver class
 ///
+/// \author LogiBear
+/////////////////////////////////////////////
 class Driver
 {
 
 
 public:
 
-  ///
+  /////////////////////////////////////////////
   /// \brief Driver
   /// \param world
-  ///
+  /////////////////////////////////////////////
   Driver(
-         World    &world,
-         Renderer &renderer
+         World     &world,
+         IOHandler &ioHandler
          ) noexcept;
 
 
-  ///
+  /////////////////////////////////////////////
   /// \brief ~Driver
-  ///
+  /////////////////////////////////////////////
   virtual
   ~Driver( );
 
 
-  ///
+  /////////////////////////////////////////////
   /// \brief exec
   /// \param argc
   /// \param argv
   /// \return
-  ///
+  /////////////////////////////////////////////
   int exec (
             int          argc,
             const char **argv
@@ -53,13 +55,13 @@ public:
 
 
 
-  ///
+  /////////////////////////////////////////////
   /// \brief printProjectInfo
   /// \param name
   /// \param versionMajor
   /// \param versionMinor
   /// \param versionPatch
-  ///
+  /////////////////////////////////////////////
   static
   void printProjectInfo (
                          const std::string name,
@@ -71,9 +73,9 @@ public:
 
 protected:
 
-  const double startTime_;
-  const double timeStep_;
-  double worldTime_;
+  const double  startTime_;
+  const double  timeStep_;
+  double        worldTime_;
   unsigned long updateFrame_;
 
   double timeScale_;
@@ -81,7 +83,7 @@ protected:
 
 
   World    &world_;
-  Renderer &renderer_;
+  IOHandler &ioHandler_;
 
 
 private:
@@ -124,4 +126,4 @@ private:
 } // namespace lbp
 
 
-#endif // DRIVER_HPP
+#endif // Driver_hpp

@@ -1,6 +1,6 @@
 #include "Driver.hpp"
 #include "World.hpp"
-#include "Renderer.hpp"
+#include "IOHandler.hpp"
 
 
 #include <iostream>
@@ -26,8 +26,8 @@ const double MAX_TIMESTEP_NFTR_LOOP = 0.05;
 /// \author LogiBear
 /////////////////////////////////////////////
 Driver::Driver(
-               World    &world,
-               Renderer &renderer
+               World     &world,
+               IOHandler &ioHandler
                ) noexcept
   :
   startTime_    ( 0.0 )
@@ -37,7 +37,7 @@ Driver::Driver(
   , timeScale_  ( 1.0 )
   , paused_     ( false )
   , world_      ( world )
-  , renderer_   ( renderer )
+  , ioHandler_   ( ioHandler )
   , initTime_( std::chrono::system_clock::now( ) )
 {}
 
@@ -113,7 +113,7 @@ void
 Driver::_runAFAPLoop( )
 {
 
-  while ( !world_.requestingExit( ) )
+  while ( !ioHandler_.isExitRequested( ) )
   {
 
     if ( !paused_ )
@@ -125,7 +125,9 @@ Driver::_runAFAPLoop( )
 
     }
 
-    renderer_.render( 1.0 );
+    ioHandler_.showWorld( 1.0 );
+
+    ioHandler_.updateIO( );
 
     ///\todo print timing info
 
@@ -159,7 +161,7 @@ Driver::_runNFTRLoop( )
   //
   // Loop until the user closes the window
   //
-  while ( !world_.requestingExit( ) )
+  while ( !ioHandler_.isExitRequested( ) )
   {
 
     if ( !paused_ )
@@ -170,7 +172,9 @@ Driver::_runNFTRLoop( )
 
       if ( frameTime > MAX_TIMESTEP_NFTR_LOOP )
       {
+
         frameTime = MAX_TIMESTEP_NFTR_LOOP;
+
       }
 
       currentTime = newTime;
@@ -195,13 +199,15 @@ Driver::_runNFTRLoop( )
     else
     {
 
-      currentTime = _getTimeSeconds();
+      currentTime = _getTimeSeconds( );
 
     }
 
     alpha = accumulator / deltaTime;
 
-    renderer_.render( alpha );
+    ioHandler_.showWorld( alpha );
+
+    ioHandler_.updateIO( );
 
     ///\todo print timing info
 

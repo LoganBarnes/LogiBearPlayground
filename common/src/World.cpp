@@ -5,41 +5,36 @@ namespace lbp
 {
 
 
-///
+/////////////////////////////////////////////
 /// \brief World::World
 ///
+/// \author LogiBear
+/////////////////////////////////////////////
 World::World( )
-  :
-  requestExit_( false )
 {}
 
 
-///
+/////////////////////////////////////////////
 /// \brief World::~World
 ///
+/// \author LogiBear
+/////////////////////////////////////////////
 World::~World( )
 {}
 
 
 
-///
+/////////////////////////////////////////////
 /// \brief World::update
 ///
+/// \author LogiBear
+/////////////////////////////////////////////
 void
 World::update(
-              const double worldTime, ///< update to this time
-              const double            ///< interval since last update
+              const double, ///< update to this time
+              const double  ///< interval since last update
               )
-{
-
-  if ( worldTime > 3.0 )
-  {
-
-    requestExit( );
-
-  }
-
-}
+{}
 
 
 

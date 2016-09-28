@@ -12,7 +12,7 @@ set( RUN_DIR     ${PROJECT_SOURCE_DIR}/run        )
 include( ExternalProject )
 
 ################################################
-##                    GLFW                    ##
+#             THIRDPARTY:  GLFW                #
 ################################################
 ExternalProject_Add(
                     glfwLib
@@ -29,10 +29,8 @@ ExternalProject_Add(
                     )
 
 
-
-
 ###############################################
-##                    GLM                    ##
+#             THIRDPARTY:   GLM               #
 ###############################################
 ExternalProject_Add(
                     gladLib
@@ -45,8 +43,10 @@ ExternalProject_Add(
 
 
 
+
+
 ################################################
-##                   COMMON                   ##
+#                    COMMON                    #
 ################################################
 ExternalProject_Add(
                     LBCommon

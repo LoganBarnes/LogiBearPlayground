@@ -1,65 +1,74 @@
-#ifndef World_hpp
-#define World_hpp
+#ifndef IoHandler_hpp
+#define IoHandler_hpp
 
 
 namespace lbp
 {
 
+
+class World;
+
+
 /////////////////////////////////////////////
-/// \brief The World class
+/// \brief The IOHandler class
 ///
 /// \author LogiBear
 /////////////////////////////////////////////
-class World
+class IOHandler
 {
 
 public:
 
   ///////////////////////////////////////////////////////////////
-  /// \brief World
+  /// \brief Renderer
   ///////////////////////////////////////////////////////////////
-  World( );
+  IOHandler( World &world );
 
 
   ///////////////////////////////////////////////////////////////
-  /// \brief ~World
+  /// \brief ~Renderer
   ///////////////////////////////////////////////////////////////
   virtual
-  ~World( );
+  ~IOHandler( );
 
 
   ///////////////////////////////////////////////////////////////
-  /// \brief update
+  /// \brief render
+  /// \param alpha
   ///////////////////////////////////////////////////////////////
   virtual
-  void update (
-               const double worldTime, ///< update to this time
-               const double timestep   ///< interval since last update
-               );
+  void showWorld ( const double alpha );
 
 
   ///////////////////////////////////////////////////////////////
-  /// \brief requestExit_
+  /// \brief updateIO
+  ///
+  ///        Checks for keystrokes or mouse movement (or
+  ///        alternate controllers) and updates output text,
+  ///        images, or buffer swaps not handled by showWorld()
+  ///
   ///////////////////////////////////////////////////////////////
-  void
-  requestExit( ) { requestExit_ = true; }
+  virtual
+  void updateIO ( );
+
 
   ///////////////////////////////////////////////////////////////
-  /// \brief requestingExit
-  /// \return
+  /// \brief isExitRequested
+  /// \return true if the user requested to exit the program
   ///////////////////////////////////////////////////////////////
   bool
-  requestingExit( ) { return requestExit_; }
+  isExitRequested( ) { return exitRequested_; }
 
 
-private:
+protected:
 
-  bool requestExit_;
+  World &world_;
+  bool   exitRequested_;
 
 };
 
 
-} // end namespace lbp
+} // namespace lbp
 
 
-#endif // World_hpp
+#endif // IoHandler_hpp

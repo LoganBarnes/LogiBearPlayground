@@ -3,7 +3,7 @@
 #include "ProjectConfig.hpp"
 #include "Driver.hpp"
 #include "World.hpp"
-#include "Renderer.hpp"
+#include "IOHandler.hpp"
 
 
 /////////////////////////////////////////////
@@ -33,8 +33,8 @@ main(
     ///       and pass that to the driver instead. It
     ///       will allow the driver to toggle through
     ///       different project implementations
-    lbp::World    world;
-    lbp::Renderer renderer( world );
+    lbp::World     world;
+    lbp::IOHandler renderer( world );
 
     lbp::Driver driver( world, renderer );
 
@@ -44,7 +44,7 @@ main(
   catch ( std::exception &e )
   {
 
-    std::cerr << "ERROR: failed construction: " << e.what() << std::endl;
+    std::cerr << "ERROR: program failed: " << e.what( ) << std::endl;
 
     return -1;
 

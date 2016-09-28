@@ -1,3 +1,5 @@
+#ifndef @PROJECT_NAME@Config_hpp
+#define @PROJECT_NAME@Config_hpp
 
 // the configured options and settings for Project
 
@@ -22,3 +24,5 @@ const std::string RES_PATH      = "@RES_PATH@";
 
 // use graphics features
 #cmakedefine USE_GRAPHICS
+
+#endif // @PROJECT_NAME@Config_hpp
