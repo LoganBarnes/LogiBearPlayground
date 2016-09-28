@@ -1,7 +1,7 @@
 #include "World.hpp"
 
 
-namespace lbp
+namespace lbc
 {
 
 

@@ -9,7 +9,7 @@ if ( PROJECT_CONFIG_FILE )
 
   configure_file (
                   ${SRC_DIR}/ProjectConfig.hpp.in
-                  ${PROJECT_BINARY_DIR}/ProjectConfig.hpp
+                  ${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config.hpp
                   )
 
 endif( ) # PROJECT_CONFIG_FILE
@@ -35,8 +35,8 @@ endif()
 
 
 # make project into library that can be used by multiple executables ( such as test classes )
-add_library           ( ${PROJECT_NAME} SHARED ${PROJECT_SOURCE} ${GLAD_SOURCE} )
-target_link_libraries ( ${PROJECT_NAME} ${EXTRA_LIBS} ${DEP_TARGETS}     )
+add_library           ( ${PROJECT_NAME} SHARED ${PROJECT_SOURCE}            )
+target_link_libraries ( ${PROJECT_NAME} ${PROJECT_LINK_LIBS} ${DEP_TARGETS} )
 
 if ( ${DEP_TARGETS} )
   add_dependencies ( ${PROJECT_NAME} ${DEP_TARGETS} )
@@ -78,6 +78,15 @@ install(
         RUNTIME DESTINATION bin
         LIBRARY DESTINATION lib
         )
+
+if ( PROJECT_INSTALL_HEADERS )
+
+  install(
+          FILES ${PROJECT_INSTALL_HEADERS}
+          DESTINATION include/${PROJECT_NAME}
+          )
+
+endif()
 
 #
 # copy .dlls to same directory on windows

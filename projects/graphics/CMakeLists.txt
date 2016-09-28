@@ -1,8 +1,11 @@
 cmake_minimum_required ( VERSION 3.0.0 )
-project ( Common )
+project ( Graphics )
+
+set( COMMON_PATH "${PROJECT_SOURCE_DIR}/../../common" CACHE STRING "" )
+
 
 # namespace used for project
-set ( PROJECT_NAMESPACE lbc )
+set ( PROJECT_NAMESPACE graphics )
 
 # The version number.
 set ( PROJECT_VERSION_MAJOR 1 )
@@ -17,16 +20,20 @@ set( PROJECT_CONFIG_FILE ${SRC_DIR}/ProjectConfig.hpp.in )
 find_package( PkgConfig REQUIRED   )
 pkg_search_module( GLFW REQUIRED glfw3 )
 
+find_library( COMMON_LIB Common ${CMAKE_INSTALL_PREFIX}/lib )
+
 # system header dirs
 set(
     PROJECT_SYSTEM_INCLUDE_DIRS
     ${GLFW_INCLUDE_DIRS}
+    ${CMAKE_INSTALL_PREFIX}/include
     )
 
 # libraries to link against
 set(
-    TARGET_LINK_LIBS
+    PROJECT_LINK_LIBS
     ${GLFW_LIBRARIES}
+    ${COMMON_LIB}
     )
 
 # header dirs
@@ -38,21 +45,11 @@ set(
 # cpp files
 set(
     PROJECT_SOURCE
-    ${SRC_DIR}/Driver.cpp
-    ${SRC_DIR}/IOHandler.cpp
-    ${SRC_DIR}/World.cpp
-    )
-
-# headers to install
-set(
-    PROJECT_INSTALL_HEADERS
-    ${SRC_DIR}/Driver.hpp
-    ${SRC_DIR}/IOHandler.hpp
-    ${SRC_DIR}/World.hpp
+    ${SRC_DIR}/GraphicsIOHandler.cpp
     )
 
 # file with main function
-set( PROJECT_MAIN ${SRC_DIR}/ExampleMain.cpp )
+set( PROJECT_MAIN ${SRC_DIR}/GraphicsMain.cpp )
 
-include( cmake/DefaultProjectLibrary.cmake )
+include( ${COMMON_PATH}/cmake/DefaultProjectLibrary.cmake )
 

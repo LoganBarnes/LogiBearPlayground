@@ -7,7 +7,7 @@
 #include <sstream>
 
 
-namespace lbp
+namespace lbc
 {
 
 

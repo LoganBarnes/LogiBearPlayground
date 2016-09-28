@@ -6,7 +6,7 @@
 #include <chrono>
 
 
-namespace lbp
+namespace lbc
 {
 
 

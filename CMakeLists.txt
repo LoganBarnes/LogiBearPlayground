@@ -4,9 +4,13 @@ project ( LBSetup )
 
 set( BUILD_DIR_NAME _build )
 
-set( COMMON_PATH ${PROJECT_SOURCE_DIR}/common     )
-set( THIRDPARTY  ${PROJECT_SOURCE_DIR}/thirdparty )
-set( RUN_DIR     ${PROJECT_SOURCE_DIR}/run        )
+set( THIRDPARTY   ${PROJECT_SOURCE_DIR}/thirdparty )
+set( COMMON_PATH  ${PROJECT_SOURCE_DIR}/common     )
+set( RUN_DIR      ${PROJECT_SOURCE_DIR}/run        )
+set( PROJECTS_DIR ${PROJECT_SOURCE_DIR}/projects   )
+
+
+set( GRAPHICS_PATH ${PROJECTS_DIR}/graphics )
 
 
 include( ExternalProject )
@@ -49,12 +53,33 @@ ExternalProject_Add(
 #                    COMMON                    #
 ################################################
 ExternalProject_Add(
-                    LBCommon
-                    PREFIX          ${PROJECT_BINARY_DIR}/common
+                    lbCommon
+                    PREFIX           ${PROJECT_BINARY_DIR}/common
                     DEPENDS          glfwLib gladLib
                     DOWNLOAD_COMMAND ""
                     UPDATE_COMMAND   ""
                     SOURCE_DIR       ${COMMON_PATH}
                     CMAKE_ARGS       -DCMAKE_INSTALL_PREFIX:STRING=${RUN_DIR}
                     )
+
+
+
+
+################################################
+#                    COMMON                    #
+################################################
+ExternalProject_Add(
+                    graphics
+                    PREFIX           ${PROJECT_BINARY_DIR}/graphics
+                    DEPENDS          lbCommon
+                    DOWNLOAD_COMMAND ""
+                    UPDATE_COMMAND   ""
+                    SOURCE_DIR       ${GRAPHICS_PATH}
+                    CMAKE_ARGS       -DCOMMON_PATH:STRING=${COMMON_PATH}
+                                     -DCMAKE_INSTALL_PREFIX:STRING=${RUN_DIR}
+                    )
+
+
+
+
 

@@ -7,7 +7,7 @@
 #include <random>
 
 
-namespace lbp
+namespace lbc
 {
 
 

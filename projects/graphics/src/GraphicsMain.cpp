@@ -1,9 +1,9 @@
 #include <iostream>
 #include <exception>
-#include "CommonConfig.hpp"
-#include "Driver.hpp"
-#include "World.hpp"
-#include "IOHandler.hpp"
+#include "GraphicsConfig.hpp"
+#include "Common/Driver.hpp"
+#include "Common/World.hpp"
+#include "GraphicsIOHandler.hpp"
 
 
 /////////////////////////////////////////////
@@ -20,10 +20,10 @@ main(
 {
 
   lbc::Driver::printProjectInfo(
-                                lbc::PROJECT_NAME,
-                                lbc::VERSION_MAJOR,
-                                lbc::VERSION_MINOR,
-                                lbc::VERSION_PATCH
+                                graphics::PROJECT_NAME,
+                                graphics::VERSION_MAJOR,
+                                graphics::VERSION_MINOR,
+                                graphics::VERSION_PATCH
                                 );
 
   try
@@ -34,14 +34,14 @@ main(
     // and ioHandler to interface between the
     // world and the user
     //
-    lbc::World     world;
-    lbc::IOHandler renderer( world );
+    lbc::World             world;
+    graphics::GraphicsIOHandler ioHandler( world );
 
     //
     // pass world and ioHandler to driver
     // to manage update loops
     //
-    lbc::Driver driver( world, renderer );
+    lbc::Driver driver( world, ioHandler );
 
     //
     // run program

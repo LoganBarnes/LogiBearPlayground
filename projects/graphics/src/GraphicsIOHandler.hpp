@@ -1,20 +1,28 @@
-#ifndef IoHandler_hpp
-#define IoHandler_hpp
+#ifndef GraphicsIOHandler_hpp
+#define GraphicsIOHandler_hpp
+
+
+#include "Common/IOHandler.hpp"
 
 
 namespace lbc
 {
 
-
 class World;
+
+}
+
+
+namespace graphics
+{
 
 
 /////////////////////////////////////////////
-/// \brief The IOHandler class
+/// \brief The GraphicsIOHandler class
 ///
 /// \author LogiBear
 /////////////////////////////////////////////
-class IOHandler
+class GraphicsIOHandler : public lbc::IOHandler
 {
 
 public:
@@ -22,14 +30,14 @@ public:
   ///////////////////////////////////////////////////////////////
   /// \brief Renderer
   ///////////////////////////////////////////////////////////////
-  IOHandler( World &world );
+  GraphicsIOHandler( lbc::World &world );
 
 
   ///////////////////////////////////////////////////////////////
   /// \brief ~Renderer
   ///////////////////////////////////////////////////////////////
   virtual
-  ~IOHandler( );
+  ~GraphicsIOHandler( );
 
 
   ///////////////////////////////////////////////////////////////
@@ -52,23 +60,11 @@ public:
   void updateIO ( );
 
 
-  ///////////////////////////////////////////////////////////////
-  /// \brief isExitRequested
-  /// \return true if the user requested to exit the program
-  ///////////////////////////////////////////////////////////////
-  bool
-  isExitRequested( ) { return exitRequested_; }
-
-
-protected:
-
-  World &world_;
-  bool   exitRequested_;
 
 };
 
 
-} // namespace lbp
+} // namespace graphics
 
 
-#endif // IoHandler_hpp
+#endif // GraphicsIOHandler_hpp

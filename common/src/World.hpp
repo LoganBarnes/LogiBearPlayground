@@ -2,7 +2,7 @@
 #define World_hpp
 
 
-namespace lbp
+namespace lbc
 {
 
 /////////////////////////////////////////////
