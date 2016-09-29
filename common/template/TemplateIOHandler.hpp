@@ -1,38 +1,38 @@
-#ifndef IoHandler_hpp
-#define IoHandler_hpp
+#ifndef @NEW_PROJECT@IoHandler_hpp
+#define @NEW_PROJECT@IoHandler_hpp
 
 
-namespace lbc
+#include "Common/IOHandler.hpp"
+
+
+namespace @NEW_PROJECT_NAMESPACE@
 {
 
 
-class World;
+class @NEW_PROJECT@World;
 
 
 /////////////////////////////////////////////
-/// \brief The IOHandler class
+/// \brief The @NEW_PROJECT@IOHandler class
 ///
 /// \author LogiBear
 /////////////////////////////////////////////
-class IOHandler
+class @NEW_PROJECT@IOHandler : public lbc::IOHandler
 {
 
 public:
 
   ///////////////////////////////////////////////////////////////
-  /// \brief Renderer
+  /// \brief @NEW_PROJECT@IOHandler
   ///////////////////////////////////////////////////////////////
-  IOHandler(
-            World &world,
-            bool   printInfo = true
-            );
+  @NEW_PROJECT@IOHandler( @NEW_PROJECT@World &world );
 
 
   ///////////////////////////////////////////////////////////////
-  /// \brief ~Renderer
+  /// \brief ~@NEW_PROJECT@IOHandler
   ///////////////////////////////////////////////////////////////
   virtual
-  ~IOHandler( );
+  ~@NEW_PROJECT@IOHandler( );
 
 
   ///////////////////////////////////////////////////////////////
@@ -65,13 +65,13 @@ public:
 
 protected:
 
-  World &world_;
+  @NEW_PROJECT@World &world_;
   bool exitRequested_;
 
 };
 
 
-} // namespace lbp
+} // namespace @NEW_PROJECT_NAMESPACE@
 
 
-#endif // IoHandler_hpp
+#endif // @NEW_PROJECT@IoHandler_hpp

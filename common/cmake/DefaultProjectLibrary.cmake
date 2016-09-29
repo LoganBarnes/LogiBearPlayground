@@ -8,7 +8,7 @@ set( THIRDPARTY ${PROJECT_SOURCE_DIR}/thirdparty )
 if ( PROJECT_CONFIG_FILE )
 
   configure_file (
-                  ${SRC_DIR}/ProjectConfig.hpp.in
+                  ${PROJECT_CONFIG_FILE}
                   ${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config.hpp
                   )
 

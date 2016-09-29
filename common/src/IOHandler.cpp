@@ -30,6 +30,8 @@ signalHandler( int signum )
 
 }
 
+
+
 }
 
 
@@ -38,7 +40,10 @@ signalHandler( int signum )
 ///
 /// \author LogiBear
 /////////////////////////////////////////////
-IOHandler::IOHandler( World &world )
+IOHandler::IOHandler(
+                     World &world,
+                     bool   printInfo
+                     )
   :
   world_          ( world )
   , exitRequested_( false )
@@ -46,7 +51,12 @@ IOHandler::IOHandler( World &world )
 
   signal ( SIGINT, signalHandler );
 
-  std::cout << "Press 'CTRL + C' to exit" << std::endl;
+  if ( printInfo )
+  {
+
+    std::cout << "Press 'CTRL + C' to exit" << std::endl;
+
+  }
 
 }
 
@@ -85,6 +95,7 @@ IOHandler::updateIO( )
   exitRequested_ |= signalCaught;
 
 }
+
 
 
 } // namespace lbp

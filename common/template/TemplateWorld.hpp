@@ -1,77 +1,68 @@
-#ifndef IoHandler_hpp
-#define IoHandler_hpp
+#ifndef @NEW_PROJECT@World_hpp
+#define @NEW_PROJECT@World_hpp
 
 
-namespace lbc
+#include "Common/World.hpp"
+
+
+namespace @NEW_PROJECT_NAMESPACE@
 {
 
-
-class World;
-
-
 /////////////////////////////////////////////
-/// \brief The IOHandler class
+/// \brief The @NEW_PROJECT@World class
 ///
 /// \author LogiBear
 /////////////////////////////////////////////
-class IOHandler
+class @NEW_PROJECT@World : public lbc::World
 {
 
 public:
 
   ///////////////////////////////////////////////////////////////
-  /// \brief Renderer
+  /// \brief @NEW_PROJECT@World
   ///////////////////////////////////////////////////////////////
-  IOHandler(
-            World &world,
-            bool   printInfo = true
-            );
+  @NEW_PROJECT@World( );
 
 
   ///////////////////////////////////////////////////////////////
-  /// \brief ~Renderer
+  /// \brief ~@NEW_PROJECT@World
   ///////////////////////////////////////////////////////////////
   virtual
-  ~IOHandler( );
+  ~@NEW_PROJECT@World( );
 
 
   ///////////////////////////////////////////////////////////////
-  /// \brief render
-  /// \param alpha
-  ///////////////////////////////////////////////////////////////
-  virtual
-  void showWorld ( const double alpha );
-
-
-  ///////////////////////////////////////////////////////////////
-  /// \brief updateIO
-  ///
-  ///        Checks for keystrokes or mouse movement (or
-  ///        alternate controllers) and updates output text,
-  ///        images, or buffer swaps not handled by showWorld()
-  ///
+  /// \brief update
   ///////////////////////////////////////////////////////////////
   virtual
-  void updateIO ( );
+  void update (
+               const double worldTime, ///< update to this time
+               const double timestep   ///< interval since last update
+               );
 
 
   ///////////////////////////////////////////////////////////////
-  /// \brief isExitRequested
-  /// \return true if the user requested to exit the program
+  /// \brief requestExit_
+  ///////////////////////////////////////////////////////////////
+  void
+  requestExit( ) { requestExit_ = true; }
+
+  ///////////////////////////////////////////////////////////////
+  /// \brief requestingExit
+  /// \return
   ///////////////////////////////////////////////////////////////
   bool
-  isExitRequested( ) { return exitRequested_; }
+  requestingExit( ) { return requestExit_; }
 
 
-protected:
+private:
 
-  World &world_;
-  bool exitRequested_;
+  bool requestExit_;
 
 };
 
 
-} // namespace lbp
+} // namespace @NEW_PROJECT_NAMESPACE@
 
 
-#endif // IoHandler_hpp
+#endif // @NEW_PROJECT@World_hpp

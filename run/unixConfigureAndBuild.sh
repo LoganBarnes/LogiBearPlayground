@@ -8,6 +8,6 @@ if [[ ! -d _build ]];
 fi;
 
 cd _build
-cmake -DINSTALL_DIR=$RUN_DIR ../..
+cmake -DNEW_PROJECT="" ../..
 make -j12
 cd ..
