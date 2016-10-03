@@ -11,7 +11,6 @@ set( PROJECTS_DIR ${PROJECT_SOURCE_DIR}/projects   )
 
 
 set( GRAPHICS_PATH ${PROJECTS_DIR}/graphics )
-set( INT_TEST_PATH ${PROJECTS_DIR}/intTest  )
 set( TEST_PATH     ${PROJECTS_DIR}/test     )
 
 
@@ -104,29 +103,6 @@ ExternalProject_Add(
 ExternalProject_Add_Step(
                          graphicsProj graphicsConfigure
                          COMMAND ${CMAKE_COMMAND} -E echo "Force graphics configure"
-                         DEPENDERS configure
-                         ALWAYS 1
-                         )
-
-
-
-################################################
-#                   INT TEST                   #
-################################################
-ExternalProject_Add(
-                    intTestProj
-                    PREFIX           ${PROJECT_BINARY_DIR}/intTest
-                    DEPENDS          lbCommonProj
-                    DOWNLOAD_COMMAND ""
-                    UPDATE_COMMAND   ""
-                    SOURCE_DIR       ${INT_TEST_PATH}
-                    CMAKE_ARGS       -DCOMMON_PATH:STRING=${COMMON_PATH}
-                                     -DCMAKE_INSTALL_PREFIX:STRING=${RUN_DIR}
-                    )
-
-ExternalProject_Add_Step(
-                         intTestProj intTestConfigure
-                         COMMAND ${CMAKE_COMMAND} -E echo "Force intTest configure"
                          DEPENDERS configure
                          ALWAYS 1
                          )

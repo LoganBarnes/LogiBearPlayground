@@ -8,6 +8,6 @@ if [[ ! -d _build ]];
 fi;
 
 cd _build
-cmake -DNEW_PROJECT="" ../..
+cmake -DNEW_PROJECT="" -DCMAKE_BUILD_TYPE=Debug ../..
 make -j12
 cd ..

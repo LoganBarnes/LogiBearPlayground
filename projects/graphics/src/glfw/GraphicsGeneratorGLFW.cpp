@@ -1,7 +1,6 @@
 #include "GraphicsGeneratorGLFW.hpp"
 
 #include <iostream>
-#include <algorithm>
 #include <sstream>
 
 #define GLFW_INCLUDE_GL_3
@@ -9,7 +8,6 @@
 
 #include "GraphicsContextGLFW.hpp"
 #include "GraphicsHandler.hpp"
-//#include "CallbackSingleton.hpp"
 
 
 namespace graphics

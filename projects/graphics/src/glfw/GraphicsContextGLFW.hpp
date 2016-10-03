@@ -15,6 +15,9 @@ namespace graphics
 {
 
 
+///
+/// \brief The GraphicsContextGLFW class
+///
 class GraphicsContextGLFW : public GraphicsContext
 {
 
