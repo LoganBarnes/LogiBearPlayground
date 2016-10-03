@@ -2,6 +2,8 @@
 #define GraphicsIOHandler_hpp
 
 
+#include <memory>
+#include <vector>
 #include "Common/IOHandler.hpp"
 
 
@@ -15,6 +17,10 @@ class World;
 
 namespace graphics
 {
+
+
+class GraphicsGenerator;
+class GraphicsHandler;
 
 
 /////////////////////////////////////////////
@@ -59,6 +65,12 @@ public:
   virtual
   void updateIO ( );
 
+
+private:
+
+  std::unique_ptr< GraphicsGenerator > upGraphicsGenerator_;
+
+  std::vector< std::reference_wrapper< GraphicsHandler > > handlers_;
 
 
 };

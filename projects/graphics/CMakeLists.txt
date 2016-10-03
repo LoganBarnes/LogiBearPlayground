@@ -20,6 +20,7 @@ set( PROJECT_CONFIG_FILE ${SRC_DIR}/ProjectConfig.hpp.in )
 find_package( PkgConfig REQUIRED   )
 pkg_search_module( GLFW REQUIRED glfw3 )
 
+find_library( GLAD_LIB   glad   ${CMAKE_INSTALL_PREFIX}/lib )
 find_library( COMMON_LIB Common ${CMAKE_INSTALL_PREFIX}/lib )
 
 # system header dirs
@@ -33,6 +34,7 @@ set(
 set(
     PROJECT_LINK_LIBS
     ${GLFW_LIBRARIES}
+    ${GLAD_LIB}
     ${COMMON_LIB}
     )
 
@@ -40,12 +42,19 @@ set(
 set(
     PROJECT_INCLUDE_DIRS
     ${SRC_DIR}
+    ${SRC_DIR}/common
+    ${SRC_DIR}/graphics
+    ${SRC_DIR}/glfw
     )
 
 # cpp files
 set(
     PROJECT_SOURCE
     ${SRC_DIR}/GraphicsIOHandler.cpp
+    ${SRC_DIR}/graphics/GraphicsGenerator.cpp
+    ${SRC_DIR}/graphics/GraphicsHandler.cpp
+    ${SRC_DIR}/glfw/GraphicsContextGLFW.cpp
+    ${SRC_DIR}/glfw/GraphicsGeneratorGLFW.cpp
     )
 
 # file with main function
