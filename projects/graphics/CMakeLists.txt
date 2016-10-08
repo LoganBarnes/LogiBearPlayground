@@ -50,11 +50,18 @@ set(
 # cpp files
 set(
     PROJECT_SOURCE
+
+    # 'Common' subclasses
     ${SRC_DIR}/GraphicsIOHandler.cpp
+
+    # generic graphics
     ${SRC_DIR}/graphics/GraphicsGenerator.cpp
     ${SRC_DIR}/graphics/GraphicsHandler.cpp
+
+    # glfw specific
     ${SRC_DIR}/glfw/GraphicsContextGLFW.cpp
     ${SRC_DIR}/glfw/GraphicsGeneratorGLFW.cpp
+    ${SRC_DIR}/glfw/CallbackSingleton.cpp
     )
 
 # file with main function

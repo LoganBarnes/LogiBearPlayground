@@ -8,6 +8,7 @@
 
 #include "GraphicsContextGLFW.hpp"
 #include "GraphicsHandler.hpp"
+#include "CallbackSingleton.hpp"
 
 
 namespace graphics
@@ -120,7 +121,7 @@ GraphicsGeneratorGLFW::_initGLFW( )
   // set error callback before anything else to get
   // error messages from future calls
   //
-//  glfwSetErrorCallback( CallbackSingleton::errorCallback );
+  glfwSetErrorCallback( CallbackSingleton::errorCallback );
 
   //
   // If we aren't already initialized then try
