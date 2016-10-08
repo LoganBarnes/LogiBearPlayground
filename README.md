@@ -1,17 +1,18 @@
+Logi Bear Playground
+====================
 
-Logan Barnes' Playground
-------------------------
+Unix
+----
 
-
-UNIX:
-
+```bash
 cd run
 ./unixConfigureAndBuild.sh
 ./bin/run<Project>
+```
 
 
-
-
-WINDOWS: (not implemented yet)
+Windows
+-------
+Not implemented yet :[
 
 
