@@ -7,7 +7,7 @@ UNIX:
 
 cd run
 ./unixConfigureAndBuild.sh
-./bin/runBaseProject
+./bin/run<Project>
 
 
 
