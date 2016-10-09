@@ -1,7 +1,7 @@
+@ECHO OFF
+
 rem run this from the Developer Command Prompt for VS since
 rem the MSBuild.exe path will already be set
-
-@ECHO OFF
 
 SET RUN_DIR="%CD%"
 
