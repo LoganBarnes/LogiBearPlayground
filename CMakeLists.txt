@@ -4,7 +4,6 @@ project ( LBSetup )
 
 set( BUILD_DIR_NAME _build )
 
-set( THIRDPARTY   ${PROJECT_SOURCE_DIR}/thirdparty )
 set( COMMON_PATH  ${PROJECT_SOURCE_DIR}/common     )
 set( RUN_DIR      ${PROJECT_SOURCE_DIR}/run        )
 set( PROJECTS_DIR ${PROJECT_SOURCE_DIR}/projects   )
@@ -16,53 +15,6 @@ set( TEST_PATH     ${PROJECTS_DIR}/test     )
 
 include( ExternalProject )
 
-################################################
-#             THIRDPARTY:  GLFW                #
-################################################
-ExternalProject_Add(
-                    glfwLib
-                    PREFIX           ${THIRDPARTY}/_build/glfw
-                    DOWNLOAD_COMMAND ""
-                    UPDATE_COMMAND   ""
-                    SOURCE_DIR       ${THIRDPARTY}/glfw
-                    CMAKE_ARGS       -DGLFW_BUILD_DOCS:BOOL=OFF
-                                     -DGLFW_BUILD_TESTS:BOOL=OFF
-                                     -DGLFW_BUILD_EXAMPLES:BOOL=OFF
-                                     -DBUILD_SHARED_LIBS:BOOL=ON
-                                     -DUSE_MSVC_RUNTIME_LIBRARY_DLL:BOOL=ON
-                                     -DCMAKE_INSTALL_PREFIX:STRING=${RUN_DIR}
-                    )
-
-ExternalProject_Add_Step(
-                         glfwLib glfwConfigure
-                         COMMAND ${CMAKE_COMMAND} -E echo "Force glfw configure"
-                         DEPENDERS configure
-                         ALWAYS 1
-                         )
-
-
-
-###############################################
-#             THIRDPARTY:   GLM               #
-###############################################
-ExternalProject_Add(
-                    gladLib
-                    PREFIX           ${THIRDPARTY}/_build/glad
-                    DOWNLOAD_COMMAND ""
-                    UPDATE_COMMAND   ""
-                    SOURCE_DIR       ${THIRDPARTY}/glad
-                    CMAKE_ARGS       -DCMAKE_INSTALL_PREFIX:STRING=${RUN_DIR}
-                    )
-
-ExternalProject_Add_Step(
-                         gladLib gladConfigure
-                         COMMAND ${CMAKE_COMMAND} -E echo "Force glad configure"
-                         DEPENDERS configure
-                         ALWAYS 1
-                         )
-
-
-
 
 ################################################
 #                    COMMON                    #
@@ -70,7 +22,6 @@ ExternalProject_Add_Step(
 ExternalProject_Add(
                     lbCommonProj
                     PREFIX           ${PROJECT_BINARY_DIR}/common
-                    DEPENDS          glfwLib gladLib
                     DOWNLOAD_COMMAND ""
                     UPDATE_COMMAND   ""
                     SOURCE_DIR       ${COMMON_PATH}
@@ -97,6 +48,7 @@ ExternalProject_Add(
                     UPDATE_COMMAND   ""
                     SOURCE_DIR       ${GRAPHICS_PATH}
                     CMAKE_ARGS       -DCOMMON_PATH:STRING=${COMMON_PATH}
+                                     -DCMAKE_PREFIX_PATH:STRING=${RUN_DIR}
                                      -DCMAKE_INSTALL_PREFIX:STRING=${RUN_DIR}
                     )
 
@@ -106,31 +58,6 @@ ExternalProject_Add_Step(
                          DEPENDERS configure
                          ALWAYS 1
                          )
-
-
-
-
-################################################
-#                     TEST                     #
-################################################
-ExternalProject_Add(
-                    testProj
-                    PREFIX           ${PROJECT_BINARY_DIR}/test
-                    DEPENDS          lbCommonProj
-                    DOWNLOAD_COMMAND ""
-                    UPDATE_COMMAND   ""
-                    SOURCE_DIR       ${TEST_PATH}
-                    CMAKE_ARGS       -DCOMMON_PATH:STRING=${COMMON_PATH}
-                                     -DCMAKE_INSTALL_PREFIX:STRING=${RUN_DIR}
-                    )
-
-ExternalProject_Add_Step(
-                         testProj testConfigure
-                         COMMAND ${CMAKE_COMMAND} -E echo "Force test configure"
-                         DEPENDERS configure
-                         ALWAYS 1
-                         )
-
 
 
 ################################################

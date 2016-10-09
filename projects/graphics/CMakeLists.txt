@@ -13,28 +13,49 @@ set ( PROJECT_VERSION_MINOR 0 )
 set ( PROJECT_VERSION_PATCH 0 )
 
 # required before DefaultProjectLibrary.cmake
-set( SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src )
+set( SRC_DIR    ${CMAKE_CURRENT_SOURCE_DIR}/src        )
+set( THIRDPARTY ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty )
 
-set( PROJECT_CONFIG_FILE ${SRC_DIR}/ProjectConfig.hpp.in )
+set( PROJECT_CONFIG_FILE ${SRC_DIR}/ProjectConfig.hpp.in        )
+set( DLL_DEFINES_FILE    ${SRC_DIR}/common/DLLDefines.hpp.in    )
 
-find_package( PkgConfig REQUIRED   )
-pkg_search_module( GLFW REQUIRED glfw3 )
+#
+# add glfw3 functionality
+#
+set( GLFW_BUILD_DOCS     OFF CACHE BOOL "" FORCE )
+set( GLFW_BUILD_TESTS    OFF CACHE BOOL "" FORCE )
+set( GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE )
 
-find_library( GLAD_LIB   glad   ${CMAKE_INSTALL_PREFIX}/lib )
-find_library( COMMON_LIB Common ${CMAKE_INSTALL_PREFIX}/lib )
+# set( BUILD_SHARED_LIBS   ON  CACHE BOOL "" FORCE )
+
+# if ( WIN32 )
+  # set( USE_MSVC_RUNTIME_LIBRARY_DLL ON CACHE BOOL "" FORCE )
+# endif()
+
+add_subdirectory   ( ${THIRDPARTY}/glfw )
+include_directories( SYSTEM  )
+
+#
+# common drivers
+#
+find_library( COMMON_LIB Common
+              PATHS ${CMAKE_INSTALL_PREFIX}
+              PATH_SUFFIXES lib bin )
 
 # system header dirs
 set(
     PROJECT_SYSTEM_INCLUDE_DIRS
-    ${GLFW_INCLUDE_DIRS}
+    ${THIRDPARTY}/glfw/include
+    ${THIRDPARTY}/glad/include
     ${CMAKE_INSTALL_PREFIX}/include
     )
+
 
 # libraries to link against
 set(
     PROJECT_LINK_LIBS
+    glfw
     ${GLFW_LIBRARIES}
-    ${GLAD_LIB}
     ${COMMON_LIB}
     )
 
@@ -50,6 +71,9 @@ set(
 # cpp files
 set(
     PROJECT_SOURCE
+
+    #glad
+    ${THIRDPARTY}/glad/src/glad.c
 
     # 'Common' subclasses
     ${SRC_DIR}/GraphicsIOHandler.cpp

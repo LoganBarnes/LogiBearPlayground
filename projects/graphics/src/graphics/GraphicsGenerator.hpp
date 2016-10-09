@@ -2,6 +2,7 @@
 #define GraphicsGenerator_hpp
 
 
+#include <memory>
 #include <string>
 #include <vector>
 

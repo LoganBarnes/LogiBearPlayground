@@ -66,7 +66,7 @@ public:
 protected:
 
   World &world_;
-  bool exitRequested_;
+  bool  exitRequested_;
 
 };
 

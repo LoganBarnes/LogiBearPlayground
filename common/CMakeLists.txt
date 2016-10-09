@@ -13,14 +13,12 @@ set ( PROJECT_VERSION_PATCH 0 )
 set( SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src )
 
 set( PROJECT_CONFIG_FILE ${SRC_DIR}/ProjectConfig.hpp.in )
-
-find_package( PkgConfig REQUIRED   )
-pkg_search_module( GLFW REQUIRED glfw3 )
+set( DLL_DEFINES_FILE    ${SRC_DIR}/DLLDefines.hpp.in    )
 
 # system header dirs
 set(
     PROJECT_SYSTEM_INCLUDE_DIRS
-    ${GLFW_INCLUDE_DIRS}
+    ${CMAKE_INSTALL_PREFIX}/include
     )
 
 # libraries to link against

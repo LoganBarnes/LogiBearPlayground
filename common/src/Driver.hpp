@@ -73,16 +73,10 @@ public:
 
 protected:
 
-  const double  startTime_;
-  const double  timeStep_;
-  double        worldTime_;
-  unsigned long updateFrame_;
-
   double timeScale_;
   bool paused_;
 
-
-  World    &world_;
+  World     &world_;
   IOHandler &ioHandler_;
 
 
@@ -114,6 +108,13 @@ private:
   /// \brief _getTimeSeconds
   ///////////////////////////////////////////////////////////////
   double _getTimeSeconds ( );
+
+
+
+  const double  startTime_;
+  const double  timeStep_;
+  double        worldTime_;
+  unsigned long updateFrame_;
 
 
   /// \brief initTime_

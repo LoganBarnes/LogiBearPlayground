@@ -30,15 +30,15 @@ Driver::Driver(
                IOHandler &ioHandler
                ) noexcept
   :
-  startTime_    ( 0.0 )
-  , timeStep_   ( 0.1 )
-  , worldTime_  ( startTime_ )
-  , updateFrame_( 0 )
-  , timeScale_  ( 1.0 )
+  timeScale_    ( 1.0 )
   , paused_     ( false )
   , world_      ( world )
   , ioHandler_   ( ioHandler )
-  , initTime_( std::chrono::system_clock::now( ) )
+  , startTime_  ( 0.0 )
+  , timeStep_   ( 0.1 )
+  , worldTime_  ( startTime_ )
+  , updateFrame_( 0 )
+  , initTime_   ( std::chrono::system_clock::now( ) )
 {}
 
 

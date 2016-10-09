@@ -1,5 +1,6 @@
 #include "GraphicsGenerator.hpp"
 
+#include <algorithm>
 #include "GraphicsHandler.hpp"
 
 

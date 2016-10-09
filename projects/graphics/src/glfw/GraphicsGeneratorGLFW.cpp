@@ -41,6 +41,12 @@ GraphicsGeneratorGLFW::GraphicsGeneratorGLFW( )
 GraphicsGeneratorGLFW::~GraphicsGeneratorGLFW( )
 {
 
+  //
+  // must delete handlers first because they have all
+  // the window contexts
+  //
+  handlers_.clear( );
+
   _terminateGLFW( );
 
 }
