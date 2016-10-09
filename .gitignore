@@ -2,6 +2,10 @@
 ##############
 *.user
 *.stash
+*.config
+*.creator
+*.files
+*.includes
 
 # Compiled Source #
 ###################
