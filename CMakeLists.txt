@@ -9,8 +9,9 @@ set( RUN_DIR      ${PROJECT_SOURCE_DIR}/run        )
 set( PROJECTS_DIR ${PROJECT_SOURCE_DIR}/projects   )
 
 
-set( GRAPHICS_PATH ${PROJECTS_DIR}/graphics )
-set( TEST_PATH     ${PROJECTS_DIR}/test     )
+set( GRAPHICS_PATH    ${PROJECTS_DIR}/graphics   )
+set( OP_GRAPHICS_PATH ${PROJECTS_DIR}/opGraphics )
+set( TEST_PATH        ${PROJECTS_DIR}/test       )
 
 
 include( ExternalProject )
@@ -48,12 +49,35 @@ ExternalProject_Add(
                     UPDATE_COMMAND   ""
                     SOURCE_DIR       ${GRAPHICS_PATH}
                     CMAKE_ARGS       -DCOMMON_PATH:STRING=${COMMON_PATH}
-                                     -DCMAKE_PREFIX_PATH:STRING=${RUN_DIR}
                                      -DCMAKE_INSTALL_PREFIX:STRING=${RUN_DIR}
                     )
 
 ExternalProject_Add_Step(
                          graphicsProj graphicsConfigure
+                         COMMAND ${CMAKE_COMMAND} -E echo "Force graphics configure"
+                         DEPENDERS configure
+                         ALWAYS 1
+                         )
+
+
+
+
+################################################
+#                 OP GRAPHICS                  #
+################################################
+ExternalProject_Add(
+                    opGraphicsProj
+                    PREFIX           ${PROJECT_BINARY_DIR}/opGraphics
+                    DEPENDS          lbCommonProj
+                    DOWNLOAD_COMMAND ""
+                    UPDATE_COMMAND   ""
+                    SOURCE_DIR       ${OP_GRAPHICS_PATH}
+                    CMAKE_ARGS       -DCOMMON_PATH:STRING=${COMMON_PATH}
+                                     -DCMAKE_INSTALL_PREFIX:STRING=${RUN_DIR}
+                    )
+
+ExternalProject_Add_Step(
+                         opGraphicsProj graphicsConfigure
                          COMMAND ${CMAKE_COMMAND} -E echo "Force graphics configure"
                          DEPENDERS configure
                          ALWAYS 1
