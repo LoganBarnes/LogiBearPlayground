@@ -1,3 +1,5 @@
+rem run this from the Developer Command Prompt for VS since
+rem the MSBuild.exe path will already be set
 
 @ECHO OFF
 
@@ -9,5 +11,5 @@ mkdir _build
 
 cd _build
 cmake -DNEW_PROJECT="" -DCMAKE_INSTALL_PREFIX=%RUN_DIR% ..\..
-"C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe" /m LBSetup.sln
+MSBuild.exe /m LBSetup.sln
 cd ..
